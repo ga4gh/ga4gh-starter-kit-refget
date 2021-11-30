@@ -6,7 +6,7 @@ import static org.ga4gh.starterkit.common.constant.StarterKitConstants.REFGET;
 import static org.ga4gh.starterkit.common.constant.StarterKitConstants.V1;
 
 /**
- * DRS API URL path/routing constants
+ * Refget API URL path/routing constants
  */
 public class RefgetApiConstants {
 

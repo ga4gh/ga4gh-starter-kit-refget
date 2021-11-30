@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class RefgetServer {
 
 	/**
-	 * Run the DRS standalone server as a Spring Boot application.
+	 * Run the Refget standalone server as a Spring Boot application.
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
