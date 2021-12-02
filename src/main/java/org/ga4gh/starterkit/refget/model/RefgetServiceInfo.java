@@ -36,7 +36,7 @@ public class RefgetServiceInfo {
         getService().setCircular_supported(CIRCULAR_SUPPORTED);
         getService().setAlgorithms(ALGORITHMS);
         getService().setSubsequence_limit(SUBSEQUENCE_LIMIT);
-        getService().setSupported_api_version(SUPPORTED_API_VERSIONS);
+        getService().setSupported_api_versions(SUPPORTED_API_VERSIONS);
     }
 }
 

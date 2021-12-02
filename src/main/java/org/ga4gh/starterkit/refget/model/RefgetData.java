@@ -9,17 +9,15 @@ import org.ga4gh.starterkit.common.hibernate.HibernateEntity;
 import org.hibernate.Hibernate;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "refget_data")
+@Table(name = "refget_data"
+//        , uniqueConstraints=
+//@UniqueConstraint(columnNames={"trunc512"})
+)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonFilter("refgetDataFilter")
@@ -31,9 +29,11 @@ public class RefgetData implements HibernateEntity<String> {
     private String id;//md5 column name
 
     @Column(name = "md5")
+    @NonNull
     private String md5;
 
     @Column(name = "trunc512")
+    @NonNull
     private String trunc512;
 
     @Column(name = "length")

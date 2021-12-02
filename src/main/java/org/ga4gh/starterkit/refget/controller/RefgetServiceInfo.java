@@ -19,7 +19,7 @@ public class RefgetServiceInfo {
     @Autowired
     private LoggingUtil loggingUtil;
 
-    @GetMapping(REFGET_API_V1 + "/service-info")
+    @GetMapping(REFGET_API_V1 + "/sequence/service-info")
     public org.ga4gh.starterkit.refget.model.RefgetServiceInfo getServiceInfo(@RequestHeader(value = "Accept", required = false) String acceptHeader) {
         loggingUtil.debug("Public API request: get service-info");
         loggingUtil.trace(String.format("Accept: %s",acceptHeader));

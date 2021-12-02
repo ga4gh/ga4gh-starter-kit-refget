@@ -31,7 +31,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.ga4gh.starterkit.refget.constant.RefgetApiConstants.CIRCULAR_SUPPORTED;
 import static org.ga4gh.starterkit.refget.constant.RefgetApiConstants.REFGET_API_V1;
 import static org.ga4gh.starterkit.refget.constant.RefgetApiConstants.SUBSEQUENCE_LIMIT;
-import static org.ga4gh.starterkit.refget.constant.RefgetApiConstants.DEFAULT_CONTENT_TYPE;
+import static org.ga4gh.starterkit.refget.constant.RefgetApiConstants.DEFAULT_SEQUENCE_CONTENT_TYPE;
 
 @RestController
 public class RefgetSequence {
@@ -49,15 +49,17 @@ public class RefgetSequence {
                                               @RequestParam(value = "start", required = false) Integer start,
                                               @RequestParam(value = "end", required = false) Integer end
                               ) throws URISyntaxException, IOException, InterruptedException {
-
+    // TODO: If a start and/or end query parameter are specified the server should include a Accept-Ranges: none header in the response.
         loggingUtil.debug("Public API request: get sequence");
         loggingUtil.trace(String.format("Accept: %s, Range: %s, start: %d, end: %d",acceptHeader,rangeHeader,start,end));
 
-        if (!acceptHeader.equals(DEFAULT_CONTENT_TYPE) && !acceptHeader.equals("*/*")) {
+        if (!acceptHeader.equals(DEFAULT_SEQUENCE_CONTENT_TYPE)) {
 
             // The server SHOULD respond with an Not Acceptable error if the client requests a format not supported by the server.
             throw new RefgetNotAcceptableException("Invalid Accept Header: " + acceptHeader);
         }
+
+        // TODO: trunc512 support: Before throwing a 404 error, try retrieving the object using trunc512
         RefgetData refgetDataObject = hibernateUtil.readEntityObject(RefgetData.class,id,false);
         if (refgetDataObject == null) {
 
@@ -99,7 +101,6 @@ public class RefgetSequence {
             }
             Matcher matcher = rangeHeaderPattern.matcher(rangeHeader);
             if ((matcher.find())) {
-
                 final String[] rangeBytes = rangeHeader.split("-");
                 final Integer fbs = Integer.valueOf(StringUtils.substringBetween(rangeHeader, "=", "-"));
                 final Integer lbs = Integer.valueOf(rangeBytes[1]);
@@ -120,6 +121,9 @@ public class RefgetSequence {
                 // A server SHOULD return a 206 status code if a Range header was specified and the request was successful.
                 return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(refgetSequenceOutput.substring(fbs, lbs + 1)); //check that it doesn't go beyond subsequence limit
             }
+            else {
+                throw new BadRequestException("Incorrect Range header pattern.");
+            }
         }
         if (!(start == null) || !(end == null)) {
             if ((start == null)) {
@@ -129,7 +133,7 @@ public class RefgetSequence {
                 end = refgetSequenceOutputLength ;
             }
             if ((start < 0) || (end < 0)) {
-                throw new RefgetRangeNotSatifiable("One or both of start and end parameters are less than 0");
+                throw new BadRequestException("One or both of start and end parameters are less than 0");
             }
             if ((start >= refgetSequenceOutputLength) || (end > refgetSequenceOutputLength)) {
 

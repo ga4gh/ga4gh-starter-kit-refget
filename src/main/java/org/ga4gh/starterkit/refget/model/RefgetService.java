@@ -42,11 +42,11 @@ public class RefgetService {
         this.subsequence_limit = subsequence_limit;
     }
 
-    public List<String> getSupported_api_version() {
+    public List<String> getSupported_api_versions() {
         return supported_api_versions;
     }
 
-    public void setSupported_api_version(List<String> supported_api_versions) {
+    public void setSupported_api_versions(List<String> supported_api_versions) {
         this.supported_api_versions = supported_api_versions;
     }
 }

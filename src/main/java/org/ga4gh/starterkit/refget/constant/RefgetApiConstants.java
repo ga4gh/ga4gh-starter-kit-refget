@@ -24,7 +24,7 @@ public class RefgetApiConstants {
     //TODO: Incorporate TRUNC512 as an option while reading, writing, updating sequence and it's meta data
     public static final boolean TRUNC512 = false;
 
-    public static final boolean CIRCULAR_SUPPORTED = false;
+    public static final boolean CIRCULAR_SUPPORTED = true;
 
     public static final int SUBSEQUENCE_LIMIT = 4000000;
 

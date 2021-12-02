@@ -7,7 +7,7 @@ public class RefgetServiceInfoDefaults {
 
     public static final boolean CIRCULAR_SUPPORTED = RefgetApiConstants.CIRCULAR_SUPPORTED;
 
-    public static final List<String> ALGORITHMS = Arrays.asList("md5");
+    public static final List<String> ALGORITHMS = Arrays.asList("md5"); //TODO: trunc512 support
 
     public static final int SUBSEQUENCE_LIMIT = RefgetApiConstants.SUBSEQUENCE_LIMIT;
 

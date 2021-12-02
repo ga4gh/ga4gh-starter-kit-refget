@@ -39,7 +39,7 @@ public class RefgetMetadata {
             throw new ResourceNotFoundException("No RefgetObject found by id: " + id);
         }
         MappingJacksonValue mapping = new MappingJacksonValue(new RefgetMetadataResponse(refgetDataObject));
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","md5","trunc512","length","aliases");
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","md5","length","aliases");
         FilterProvider filters = new SimpleFilterProvider().addFilter("refgetDataFilter", filter);
         mapping.setFilters(filters);
         return mapping;
