@@ -6,13 +6,13 @@ public class RefgetService {
     private boolean circular_supported;
     private List<String> algorithms;
     private Integer subsequence_limit;
-    private List<String> supported_api_version;
+    private List<String> supported_api_versions;
 
-    public RefgetService(boolean circular_supported, List<String> algorithms, Integer subsequence_limit, List<String> supported_api_version) {
+    public RefgetService(boolean circular_supported, List<String> algorithms, Integer subsequence_limit, List<String> supported_api_versions) {
         this.circular_supported = circular_supported;
         this.algorithms = algorithms;
         this.subsequence_limit = subsequence_limit;
-        this.supported_api_version = supported_api_version;
+        this.supported_api_versions = supported_api_versions;
     }
 
     public RefgetService() {
@@ -43,10 +43,10 @@ public class RefgetService {
     }
 
     public List<String> getSupported_api_version() {
-        return supported_api_version;
+        return supported_api_versions;
     }
 
-    public void setSupported_api_version(List<String> supported_api_version) {
-        this.supported_api_version = supported_api_version;
+    public void setSupported_api_version(List<String> supported_api_versions) {
+        this.supported_api_versions = supported_api_versions;
     }
 }

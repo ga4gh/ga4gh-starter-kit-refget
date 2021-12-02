@@ -7,6 +7,7 @@ import org.ga4gh.starterkit.common.exception.ResourceNotFoundException;
 import org.ga4gh.starterkit.common.util.logging.LoggingUtil;
 import org.ga4gh.starterkit.refget.exception.RefgetNotAcceptableException;
 import org.ga4gh.starterkit.refget.model.RefgetData;
+import org.ga4gh.starterkit.refget.model.RefgetMetadataResponse;
 import org.ga4gh.starterkit.refget.utils.hibernate.RefgetHibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -37,8 +38,7 @@ public class RefgetMetadata {
         if (refgetDataObject == null) {
             throw new ResourceNotFoundException("No RefgetObject found by id: " + id);
         }
-
-        MappingJacksonValue mapping = new MappingJacksonValue(refgetDataObject);
+        MappingJacksonValue mapping = new MappingJacksonValue(new RefgetMetadataResponse(refgetDataObject));
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","md5","trunc512","length","aliases");
         FilterProvider filters = new SimpleFilterProvider().addFilter("refgetDataFilter", filter);
         mapping.setFilters(filters);
