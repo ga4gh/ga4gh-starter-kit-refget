@@ -127,7 +127,8 @@ public class RefgetServerSpringConfig {
             @Qualifier(RefgetServerConstants.DEFAULT_REFGET_CONFIG_CONTAINER) RefgetServerYamlConfigContainer defaultContainer,
             @Qualifier(RefgetServerConstants.USER_REFGET_CONFIG_CONTAINER) RefgetServerYamlConfigContainer userContainer
     ) {
-//        DeepObjectMerger.merge(userContainer, defaultContainer); //errors ->
+        DeepObjectMerger merger = new DeepObjectMerger();
+        merger.merge(userContainer, defaultContainer);
         return defaultContainer;
     }
 
@@ -221,6 +222,5 @@ public class RefgetServerSpringConfig {
         hibernateUtil.setDatabaseProps(databaseProps);
         return hibernateUtil;
     }
-
 
 }

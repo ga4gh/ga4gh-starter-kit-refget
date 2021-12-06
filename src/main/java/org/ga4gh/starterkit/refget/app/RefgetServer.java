@@ -25,7 +25,8 @@ public class RefgetServer {
 
 	private static boolean setup(String[] args) {
 		Options options = new RefgetServerSpringConfig().getCommandLineOptions();
-		return ServerPropertySetter.setServerProperties(RefgetServerYamlConfigContainer.class, args, options, "config");
+		ServerPropertySetter setter = new ServerPropertySetter();
+		return setter.setServerProperties(RefgetServerYamlConfigContainer.class, args, options, "config");
 	}
 }
 

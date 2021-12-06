@@ -103,7 +103,9 @@ public class RefgetAdmin {
             rawSequence = inputSequence;
         }
         final String cleanedInputSequence = rawSequence
-                .replaceAll(">.*?\\\n", "")
+                .replaceAll(">.*?\\\n", "") // TODO: better matching considering
+                // the IUPAC ambiguity codes
+                // $text = preg_replace( '/(\r\n)+|\r+|\n+|\t+/', ' ', $text )
                 .replaceAll("[^aAtTgGcCnN]", "")
                 .toUpperCase();
         return cleanedInputSequence;
